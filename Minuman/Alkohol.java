@@ -1,6 +1,9 @@
 package Minuman;
 
+//Abstraction
 abstract class Alkohol {
+
+    //Encapsulation
     private String namaminuman, alkohol;
     private int jumlahHalaman, kodeminuman;
 
@@ -20,7 +23,7 @@ abstract class Alkohol {
     public void setJumlahHalaman(int jumlahHalaman) {
         this.jumlahHalaman = jumlahHalaman;
     }
-
+    //constructor
     public Alkohol (int kodeminuman, String namaminuman, String alkohol, int jumlahHalaman) {
         this.kodeminuman = kodeminuman;
         this.namaminuman = namaminuman;
@@ -44,6 +47,7 @@ abstract class Alkohol {
         return jumlahHalaman;
     }
 
+//Polymorphism
     abstract public double hargaMinuman ();
     abstract public double hargaTotal ();
     abstract public void view ();

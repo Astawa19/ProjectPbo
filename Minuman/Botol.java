@@ -1,4 +1,5 @@
 package Minuman;
+//Inheritance
 class Botol extends Alkohol {
     public Botol(int kodeminuman, String namaminuman, String alkohol, int jumlahMinuman) {
         super(kodeminuman, namaminuman, alkohol, jumlahMinuman);
