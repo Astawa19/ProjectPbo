@@ -8,14 +8,16 @@ public class Main {
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        TextMinuman minuman = new TextMinuman(1, "VODKA", "40%", 100);
-        Botol botol1 = new Botol(2, "Black Tea", "40%", 100);
-        Minuman minuman1 = new Minuman(3, "RUM", "40%", 60);
+        Botol minuman = new Botol(1,"Soda", "VODKA", "40%", 100);
+        Botol botol1 = new Botol(2,"Alkohol", "Black Tea", "40%", 100);
+        Botol minuman1 = new Botol(3,"Campuran", "RUM", "40%", 60);
+        Botol aqua = new Botol();
         ArrayList<Alkohol> listAlkohol = new ArrayList<Alkohol>();
 
         listAlkohol.add(minuman);
         listAlkohol.add(botol1);
         listAlkohol.add(minuman1);
+         listAlkohol.add(aqua);
 
         while (true) {
             ubahIndex(listAlkohol);
@@ -25,7 +27,7 @@ public class Main {
                 System.out.println("=================================");
                 System.out.println("| 1. Data Minuman               |");
                 System.out.println("| 2. Transaksi                  |");
-                System.out.println("| 3. Tambah Minuma              |");
+                System.out.println("| 3. Tambah Minuman             |");
                 System.out.println("| 4. Hapus Minuman              |");
                 System.out.println("| 5. Keluar                     |");
                 System.out.println("=================================");
@@ -50,9 +52,9 @@ public class Main {
     }
 
     public static void ubahIndex(ArrayList<Alkohol> listAlkohol) {
-        for (int index = 0; index < listAlkohol.size(); index++) {
-            Alkohol buku = listAlkohol.get(index);
-            buku.setKodeMinuman(index);
+        for (int index = 1; index <= listAlkohol.size(); index++) {
+            Alkohol alkohol = listAlkohol.get(index-1);
+            alkohol.setKodeMinuman(index);
         }
     }
 
@@ -93,27 +95,27 @@ public class Main {
 
         System.out.println("Anda akan membeli :");
         System.out.println();
-        listAlkohol.get(tanya).view();
+        listAlkohol.get(tanya-1).view();
 
         double uang;
         do {
             System.out.print("Masukan uang : ");
             uang = input.nextDouble();
-            if (uang < listAlkohol.get(tanya).hargaMinuman()) {
+            if (uang < listAlkohol.get(tanya-1).hargaTotal()) {
                 System.out.println("Uang anda kurang");
             }
-        } while (uang < listAlkohol.get(tanya).hargaMinuman());
+        } while (uang < listAlkohol.get(tanya-1).hargaTotal());
 
-        double kembalian = uang - listAlkohol.get(tanya).hargaTotal();
+        double kembalian = uang - listAlkohol.get(tanya-1).hargaTotal();
         System.out.println("Kembalian anda : " + kembalian + "\n");
-        listAlkohol.remove(listAlkohol.get(tanya));
+        listAlkohol.remove(listAlkohol.get(tanya-1));
     }
 
     public static void tambahData(ArrayList<Alkohol> listAlkohol) {
         do {
             System.out.println("=================================");
             System.out.println("Pilih jenis Minuman :");
-            System.out.println("1. Minuman Beralkohol");
+            System.out.println("1. Alkohol");
             System.out.println("2. Koktail");
             System.out.println("3. Campuran");
             System.out.println("=================================");
@@ -122,9 +124,9 @@ public class Main {
         } while (tanya < 1 || tanya > 3);
 
         if (tanya == 1) {
-            Botol botol = new Botol(0, null, null, 0);
+            Botol botol = new Botol(0,null, null, null, 0);
             System.out.println("=================================");
-            System.out.println("Masukan data Botol  ");
+            System.out.println("Masukan data Minuman  ");
             System.out.println("=================================");
 
             input.nextLine();
@@ -134,12 +136,12 @@ public class Main {
             botol.setAlkohol(input.nextLine());
             System.out.print("Jumlah Minuman : ");
             botol.setJumlahHalaman(input.nextInt());
-
+            botol.setJenis("Alkohol");
             listAlkohol.add(botol);
         } else if (tanya == 2) {
-            Minuman minuman = new Minuman(0, null, null, 0);
+            Botol minuman = new Botol(0,null, null, null, 0);
             System.out.println("=================================");
-            System.out.println("Masukan data minuman  ");
+            System.out.println("Masukan Data Minuman  ");
             System.out.println("=================================");
 
             input.nextLine();
@@ -149,12 +151,13 @@ public class Main {
             minuman.setAlkohol(input.nextLine());
             System.out.print("Jumlah Minuman : ");
             minuman.setJumlahHalaman(input.nextInt());
+            minuman.setJenis("Koktail");
 
             listAlkohol.add(minuman);
         } else {
-            TextMinuman textminum = new TextMinuman(0, null, null, 0);
+            Botol textminum = new Botol(0,null, null, null, 0);
             System.out.println("=================================");
-            System.out.println("Masukan data textminuman ");
+            System.out.println("Masukan data Minuman ");
             System.out.println("=================================");
 
             input.nextLine();
@@ -164,6 +167,7 @@ public class Main {
             textminum.setAlkohol(input.nextLine());
             System.out.print("Jumlah Minuman : ");
             textminum.setJumlahHalaman(input.nextInt());
+            textminum.setJenis("Campuran");
             listAlkohol.add(textminum);
         }
 
